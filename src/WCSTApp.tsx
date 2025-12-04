@@ -630,12 +630,17 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
     <div className="container">
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <button className="secondary" onClick={onBack} style={{ padding: '8px 16px' }}>
-          ← Retour
+          {t.back}
         </button>
-        <div style={{ fontSize: 12, color: '#94a3b8' }}>
-          WCST v{appVersion} | Session: {sessionId}
-        </div>
-        <button className="secondary" onClick={() => setShowSettingsModal(true)}>⚙️</button>
+        <span style={{
+          background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          fontSize: '1.2rem',
+          letterSpacing: '3px',
+          fontWeight: '800'
+        }}>PRISME</span>
+        <button className="secondary" onClick={() => setShowSettingsModal(true)} style={{ padding: '8px 12px', fontSize: 16 }}>⚙️</button>
       </header>
 
       {showSettingsModal && (
@@ -656,9 +661,9 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
 
       {!started ? (
         <div className="intro-screen">
-          <h2 style={{ marginBottom: '10px', textAlign: 'center', background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '3rem', letterSpacing: '6px', fontWeight: '900' }}>PRISME</h2>
-          <h1 style={{ marginBottom: '20px', textAlign: 'center', fontSize: '1.5rem', color: '#94a3b8', fontWeight: '400' }}>Wisconsin Card Sorting Test</h1>
-          <p style={{ textAlign: 'center', marginBottom: '30px', color: '#e2e8f0' }}>Participant: <strong>{participantId}</strong></p>
+          <h2 style={{ marginBottom: '10px', textAlign: 'center', background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '2.5rem', letterSpacing: '5px', fontWeight: '900' }}>PRISME</h2>
+          <h1 style={{ marginBottom: '20px', textAlign: 'center', fontSize: '1.3rem', color: '#94a3b8', fontWeight: '400' }}>{t.wcstSubtitle}</h1>
+          <p style={{ textAlign: 'center', marginBottom: '30px', color: '#e2e8f0' }}>{t.participant}: <strong>{participantId}</strong></p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '300px', margin: '0 auto' }}>
 
 
@@ -668,7 +673,7 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
               fontSize: '18px',
               borderRadius: '12px'
             }}>
-              COMMENCER
+              {t.start}
             </button>
           </div>
         </div>
@@ -683,7 +688,7 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
 
           {/* Deck Card (Top) */}
           <div className="deck-area">
-            <div className="deck-label">Carte à trier</div>
+            <div className="deck-label">{t.cardToSort}</div>
             <div className="card-container">
               <CardVisual spec={deckCard} theme={settings.theme} />
             </div>

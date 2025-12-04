@@ -150,11 +150,17 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                     <button className="secondary" onClick={onBack} style={{ padding: '8px 16px' }}>
                         {t.back}
                     </button>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                        <button className="primary" onClick={downloadCSV} style={{ padding: '8px 16px', fontSize: 13 }}>
-                            {t.downloadCSV}
-                        </button>
-                    </div>
+                    <span style={{
+                        background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        fontSize: '1.2rem',
+                        letterSpacing: '3px',
+                        fontWeight: '800'
+                    }}>PRISME</span>
+                    <button className="primary" onClick={downloadCSV} style={{ padding: '8px 12px', fontSize: 14 }}>
+                        {t.downloadCSV}
+                    </button>
                 </header>
 
                 <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -175,7 +181,15 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                     <button className="secondary" onClick={onBack} style={{ padding: '8px 16px' }}>
                         {t.back}
                     </button>
-                    <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 16px' }}>
+                    <span style={{
+                        background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        fontSize: '1.2rem',
+                        letterSpacing: '3px',
+                        fontWeight: '800'
+                    }}>PRISME</span>
+                    <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 12px', fontSize: 16 }}>
                         ⚙️
                     </button>
                 </header>
@@ -242,12 +256,17 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                     <button className="secondary" onClick={handleBack} style={{ padding: '8px 16px' }}>
                         {t.back}
                     </button>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                        <span style={{ fontSize: 12, color: '#94a3b8' }}>{participantId}</span>
-                        <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 16px' }}>
-                            ⚙️
-                        </button>
-                    </div>
+                    <span style={{
+                        background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        fontSize: '1.2rem',
+                        letterSpacing: '3px',
+                        fontWeight: '800'
+                    }}>PRISME</span>
+                    <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 12px', fontSize: 16 }}>
+                        ⚙️
+                    </button>
                 </header>
 
                 {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
@@ -341,14 +360,17 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                 <button className="secondary" onClick={handleBack} style={{ padding: '8px 16px' }}>
                     {t.back}
                 </button>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <span style={{ fontSize: 12, color: '#94a3b8' }}>
-                        {t.question} {currentQuestion + 1}/10 • {participantId}
-                    </span>
-                    <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 16px' }}>
-                        ⚙️
-                    </button>
-                </div>
+                <span style={{
+                    background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    fontSize: '1.2rem',
+                    letterSpacing: '3px',
+                    fontWeight: '800'
+                }}>PRISME</span>
+                <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 12px', fontSize: 16 }}>
+                    ⚙️
+                </button>
             </header>
 
             {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}

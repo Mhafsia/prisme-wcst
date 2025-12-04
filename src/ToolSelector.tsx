@@ -17,10 +17,16 @@ export default function ToolSelector({ onSelectWCST, onSelectSUS, participantId,
     return (
         <div className="container">
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ fontSize: 12, color: '#94a3b8' }}>
-                    {t.toolkitTitle} {t.toolkitSubtitle} {t.toolkitVersion}
-                </div>
-                <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 16px' }}>
+                <div style={{ width: 80 }}></div>
+                <span style={{
+                    background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    fontSize: '1.2rem',
+                    letterSpacing: '3px',
+                    fontWeight: '800'
+                }}>PRISME</span>
+                <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 12px', fontSize: 16 }}>
                     ⚙️
                 </button>
             </header>
@@ -34,13 +40,13 @@ export default function ToolSelector({ onSelectWCST, onSelectSUS, participantId,
                         background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
-                        fontSize: '3rem',
-                        letterSpacing: '6px',
+                        fontSize: '4rem',
+                        letterSpacing: '8px',
                         fontWeight: '900'
                     }}>
                         {t.toolkitTitle}
                     </h1>
-                    <h2 style={{ marginBottom: '30px', color: '#94a3b8', fontSize: '1.2rem', fontWeight: '400' }}>
+                    <h2 style={{ marginBottom: '30px', color: '#94a3b8', fontSize: '1.3rem', fontWeight: '400' }}>
                         {t.toolkitSubtitle}
                     </h2>
 
