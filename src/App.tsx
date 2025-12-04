@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { SettingsProvider, SettingsModal, useSettings, T } from './Settings'
 import ToolSelector from './ToolSelector'
 import WCSTApp from './WCSTApp'
 import SUS from './SUS'
@@ -6,7 +7,7 @@ import './styles.css'
 
 type ActiveTool = 'selector' | 'wcst' | 'sus'
 
-export default function App() {
+function AppContent() {
     const [activeTool, setActiveTool] = useState<ActiveTool>('selector')
     const [participantId, setParticipantId] = useState('')
 
@@ -23,9 +24,8 @@ export default function App() {
             <SUS
                 participantId={participantId}
                 onBack={handleBack}
-                onComplete={(score, answers) => {
-                    console.log('SUS completed:', score, answers)
-                    // Stay on the SUS page to show score and download
+                onComplete={(score, answers, nps) => {
+                    console.log('SUS completed:', score, answers, nps)
                 }}
             />
         )
@@ -38,5 +38,13 @@ export default function App() {
             onSelectWCST={() => setActiveTool('wcst')}
             onSelectSUS={() => setActiveTool('sus')}
         />
+    )
+}
+
+export default function App() {
+    return (
+        <SettingsProvider>
+            <AppContent />
+        </SettingsProvider>
     )
 }

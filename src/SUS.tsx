@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react'
+import { useSettings, SettingsModal, T } from './Settings'
 import './styles.css'
-
-type Language = 'fr' | 'en'
 
 const FSUS_QUESTIONS = {
     fr: [
@@ -32,51 +31,6 @@ const FSUS_QUESTIONS = {
 
 const SCALE_EMOJIS = ['😞', '🙁', '😐', '🙂', '😊']
 
-const UI_TEXT = {
-    fr: {
-        back: '← Retour',
-        usability: "Questionnaire d'utilisabilité",
-        intro1: 'Nous allons vous poser',
-        intro2: '10 questions',
-        intro3: 'pour savoir comment vous avez apprécié le jeu.',
-        intro4: "Pour chaque question, indiquez votre niveau d'accord.",
-        start: 'COMMENCER',
-        question: 'Question',
-        recommend: 'Recommanderiez-vous ce système à d\'autres personnes ?',
-        notAtAll: 'Certainement pas',
-        absolutely: 'Absolument',
-        disagree: "Pas du tout d'accord",
-        agree: "Tout à fait d'accord",
-        finish: 'Terminer ✓',
-        previous: '← Précédent',
-        next: 'Suivant →',
-        downloadCSV: '📥 Télécharger CSV',
-        warningBack: 'Attention ! Si vous quittez maintenant, vos réponses seront perdues. Voulez-vous vraiment quitter ?',
-        completed: 'Merci pour vos réponses !'
-    },
-    en: {
-        back: '← Back',
-        usability: 'Usability Questionnaire',
-        intro1: 'We will ask you',
-        intro2: '10 questions',
-        intro3: 'to find out how you enjoyed the game.',
-        intro4: 'For each question, indicate your level of agreement.',
-        start: 'START',
-        question: 'Question',
-        recommend: 'Would you recommend this system to other people?',
-        notAtAll: 'Definitely not',
-        absolutely: 'Absolutely',
-        disagree: 'Strongly disagree',
-        agree: 'Strongly agree',
-        finish: 'Finish ✓',
-        previous: '← Previous',
-        next: 'Next →',
-        downloadCSV: '📥 Download CSV',
-        warningBack: 'Warning! If you leave now, your answers will be lost. Do you really want to leave?',
-        completed: 'Thank you for your answers!'
-    }
-}
-
 interface SUSProps {
     onComplete: (score: number, answers: number[], nps: number) => void
     onBack: () => void
@@ -84,7 +38,8 @@ interface SUSProps {
 }
 
 export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
-    const [lang, setLang] = useState<Language>('fr')
+    const { settings } = useSettings()
+    const [showSettings, setShowSettings] = useState(false)
     const [answers, setAnswers] = useState<(number | null)[]>(Array(10).fill(null))
     const [npsAnswer, setNpsAnswer] = useState<number | null>(null)
     const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -92,8 +47,8 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
     const [showNPS, setShowNPS] = useState(false)
     const [isFinished, setIsFinished] = useState(false)
 
-    const t = UI_TEXT[lang]
-    const questions = FSUS_QUESTIONS[lang]
+    const t = T[settings.language]
+    const questions = FSUS_QUESTIONS[settings.language]
 
     const handleBack = () => {
         const hasAnswers = answers.some(a => a !== null) || npsAnswer !== null
@@ -157,7 +112,7 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
         const row = [
             participantId || 'anon',
             new Date().toISOString(),
-            lang,
+            settings.language,
             ...answers,
             npsAnswer,
             susScore?.toFixed(1)
@@ -172,42 +127,6 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
         a.click()
         URL.revokeObjectURL(url)
     }
-
-    // Language toggle
-    const LanguageToggle = () => (
-        <div style={{ display: 'flex', gap: 4 }}>
-            <button
-                onClick={() => setLang('fr')}
-                style={{
-                    padding: '6px 14px',
-                    borderRadius: 6,
-                    border: lang === 'fr' ? '2px solid #ec4899' : '1px solid rgba(255,255,255,0.2)',
-                    background: lang === 'fr' ? 'rgba(236, 72, 153, 0.2)' : 'transparent',
-                    cursor: 'pointer',
-                    fontSize: 14,
-                    fontWeight: lang === 'fr' ? 700 : 400,
-                    color: lang === 'fr' ? '#ec4899' : '#94a3b8'
-                }}
-            >
-                FR
-            </button>
-            <button
-                onClick={() => setLang('en')}
-                style={{
-                    padding: '6px 14px',
-                    borderRadius: 6,
-                    border: lang === 'en' ? '2px solid #ec4899' : '1px solid rgba(255,255,255,0.2)',
-                    background: lang === 'en' ? 'rgba(236, 72, 153, 0.2)' : 'transparent',
-                    cursor: 'pointer',
-                    fontSize: 14,
-                    fontWeight: lang === 'en' ? 700 : 400,
-                    color: lang === 'en' ? '#ec4899' : '#94a3b8'
-                }}
-            >
-                EN
-            </button>
-        </div>
-    )
 
     // Fixed container style
     const fixedContainerStyle: React.CSSProperties = {
@@ -231,8 +150,10 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                     <button className="secondary" onClick={onBack} style={{ padding: '8px 16px' }}>
                         {t.back}
                     </button>
-                    <div style={{ fontSize: 12, color: '#94a3b8' }}>
-                        {participantId}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                        <button className="primary" onClick={downloadCSV} style={{ padding: '8px 16px', fontSize: 13 }}>
+                            {t.downloadCSV}
+                        </button>
                     </div>
                 </header>
 
@@ -240,9 +161,6 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                     <div style={{ textAlign: 'center' }}>
                         <div style={{ fontSize: 64, marginBottom: 20 }}>🎉</div>
                         <h2 style={{ marginBottom: 24, color: '#22c55e' }}>{t.completed}</h2>
-                        <button className="primary" onClick={downloadCSV} style={{ padding: '14px 28px', fontSize: 16 }}>
-                            {t.downloadCSV}
-                        </button>
                     </div>
                 </div>
             </div>
@@ -257,8 +175,12 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                     <button className="secondary" onClick={onBack} style={{ padding: '8px 16px' }}>
                         {t.back}
                     </button>
-                    <LanguageToggle />
+                    <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 16px' }}>
+                        ⚙️
+                    </button>
                 </header>
+
+                {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
 
                 <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div style={{ textAlign: 'center', maxWidth: 500 }}>
@@ -292,7 +214,7 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                         </div>
 
                         <p style={{ marginBottom: 20, color: '#94a3b8', fontSize: 14 }}>
-                            Participant : <strong style={{ color: '#ec4899' }}>{participantId}</strong>
+                            {t.participant} : <strong style={{ color: '#ec4899' }}>{participantId}</strong>
                         </p>
 
                         <button
@@ -320,10 +242,15 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                     <button className="secondary" onClick={handleBack} style={{ padding: '8px 16px' }}>
                         {t.back}
                     </button>
-                    <div style={{ fontSize: 12, color: '#94a3b8' }}>
-                        {participantId}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                        <span style={{ fontSize: 12, color: '#94a3b8' }}>{participantId}</span>
+                        <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 16px' }}>
+                            ⚙️
+                        </button>
                     </div>
                 </header>
+
+                {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
 
                 <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div style={{ width: '100%', maxWidth: 600 }}>
@@ -414,10 +341,17 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                 <button className="secondary" onClick={handleBack} style={{ padding: '8px 16px' }}>
                     {t.back}
                 </button>
-                <div style={{ fontSize: 12, color: '#94a3b8' }}>
-                    {t.question} {currentQuestion + 1}/10 • {participantId}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <span style={{ fontSize: 12, color: '#94a3b8' }}>
+                        {t.question} {currentQuestion + 1}/10 • {participantId}
+                    </span>
+                    <button className="secondary" onClick={() => setShowSettings(true)} style={{ padding: '8px 16px' }}>
+                        ⚙️
+                    </button>
                 </div>
             </header>
+
+            {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
 
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <div style={{ width: '100%', maxWidth: 600 }}>

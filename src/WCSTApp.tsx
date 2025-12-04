@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 're
 import type { CardSpec, Rule, SessionSummary, TrialLogEntry } from './types'
 import { KEY_CARDS, initWCST, getDeckCard, evaluateSelection } from './engine/wcst'
 import { computeSummary, downloadCSV, toCSV } from './logger'
+import { useSettings, T } from './Settings'
 import './styles.css'
 
 type Theme = 'forest' | 'classic'
@@ -364,6 +365,7 @@ interface WCSTAppProps {
 }
 
 export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
+  const { settings } = useSettings()
   const [sessionId, setSessionId] = useState(() => Math.random().toString(36).slice(2))
   const [seed, setSeed] = useState(42)
   const [maxTrials, setMaxTrials] = useState<number>(128)
@@ -372,12 +374,12 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
   const [logs, setLogs] = useState<TrialLogEntry[]>([])
   const [showEndModal, setShowEndModal] = useState(false)
   const [countdown, setCountdown] = useState<number | null>(null)
-  const [soundEnabled, setSoundEnabled] = useState(true)
   const [showSettingsModal, setShowSettingsModal] = useState(false)
   const [showStatsModal, setShowStatsModal] = useState(false)
   const [hasExported, setHasExported] = useState(false)
-  const [theme, setTheme] = useState<Theme>('forest')
   const [showMenu, setShowMenu] = useState(false)
+
+  const t = T[settings.language]
 
   const [deckWidth, setDeckWidth] = useState<number | null>(null)
 
@@ -465,11 +467,11 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
       n -= 1
       if (n <= 0) {
         setCountdown(null)
-        if (soundEnabled) playBeep(740)
+        if (settings.soundEnabled) playBeep(740)
         setRtStart(performance.now()) // Start timing when countdown ends
       } else {
         setCountdown(n)
-        if (soundEnabled) playBeep(500)
+        if (settings.soundEnabled) playBeep(500)
         setTimeout(tick, 1000)
       }
     }
@@ -483,7 +485,7 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
     const res = evaluateSelection(stateRef.current, cardIndex)
 
     // Play sound
-    if (soundEnabled) {
+    if (settings.soundEnabled) {
       if (res.correct) playBeep(880, 0.1)
       else playBeep(200, 0.3)
     }
@@ -613,10 +615,10 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
       {showSettingsModal && (
         <SettingsModal
           onClose={() => setShowSettingsModal(false)}
-          soundEnabled={soundEnabled}
-          setSoundEnabled={setSoundEnabled}
-          theme={theme}
-          setTheme={setTheme}
+          soundEnabled={settings.soundEnabled}
+          setSoundEnabled={(v) => { }}
+          theme={settings.theme}
+          setTheme={(t) => { }}
           maxTrials={maxTrials}
           setMaxTrials={setMaxTrials}
           seed={seed}
@@ -655,7 +657,7 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
           <div className="deck-area">
             <div className="deck-label">Carte à trier</div>
             <div className="card-container">
-              <CardVisual spec={deckCard} theme={theme} />
+              <CardVisual spec={deckCard} theme={settings.theme} />
             </div>
           </div>
 
@@ -676,7 +678,7 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
                   spec={spec}
                   onClick={() => handleCardClick(i)}
                   selected={false}
-                  theme={theme}
+                  theme={settings.theme}
                 />
               </div>
             ))}
