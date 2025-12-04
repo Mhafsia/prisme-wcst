@@ -44,3 +44,8 @@ Then open the local URL shown in the terminal (e.g., `http://192.168.1.x:5173`) 
 - **Fastest (Dev)**: Run locally with `npm run dev -- --host`, then on iPad Safari open `http://<PC_LAN_IP>:5173`. Add to Home Screen for a full-screen experience.
 - **Shareable**: Deploy to GitHub Pages (or Vercel/Netlify), open the URL on iPad, then "Add to Home Screen".
 - **Kiosk**: The app is configured as a PWA (Progressive Web App). Once added to the Home Screen, it launches without an address bar. Use iOS Guided Access to lock the iPad to the app during testing.
+
+## References
+
+- **Stoet, G. (2010)**. PsyToolkit - A software package for programming psychological experiments using Linux. *Behavior Research Methods*, 42(4), 1096-1104. [https://doi.org/10.3758/BRM.42.4.1096](https://doi.org/10.3758/BRM.42.4.1096)
+- **Stoet, G. (2017)**. PsyToolkit: A novel web-based method for running online questionnaires and reaction-time experiments. *Teaching of Psychology*, 44(1), 24-31. [https://doi.org/10.1177/0098628316677643](https://doi.org/10.1177/0098628316677643)

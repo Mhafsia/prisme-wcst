@@ -314,6 +314,8 @@ print(summary)
 - **Grant, D. A., & Berg, E. (1948)**. A behavioral analysis of degree of reinforcement and ease of shifting to new responses in a Weigl-type card-sorting problem. *Journal of Experimental Psychology*, 38(4), 404.
 - **Heaton, R. K. (1981)**. *Wisconsin Card Sorting Test manual*. Psychological Assessment Resources.
 - **Nyhus, E., & Barceló, F. (2009)**. The Wisconsin Card Sorting Test and the cognitive assessment of prefrontal executive functions: A critical update. *Brain and Cognition*, 71(3), 437-451.
+- **Stoet, G. (2010)**. PsyToolkit - A software package for programming psychological experiments using Linux. *Behavior Research Methods*, 42(4), 1096-1104. [https://doi.org/10.3758/BRM.42.4.1096](https://doi.org/10.3758/BRM.42.4.1096)
+- **Stoet, G. (2017)**. PsyToolkit: A novel web-based method for running online questionnaires and reaction-time experiments. *Teaching of Psychology*, 44(1), 24-31. [https://doi.org/10.1177/0098628316677643](https://doi.org/10.1177/0098628316677643)
 
 ---
 
