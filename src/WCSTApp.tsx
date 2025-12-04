@@ -236,8 +236,10 @@ function Summary({ logs, onExport, onPreview }: { logs: TrialLogEntry[], onExpor
   )
 }
 
-function SettingsModal({
+function WCSTSettingsModal({
   onClose,
+  language,
+  setLanguage,
   soundEnabled,
   setSoundEnabled,
   theme,
@@ -248,6 +250,8 @@ function SettingsModal({
   setSeed
 }: {
   onClose: () => void
+  language: 'fr' | 'en'
+  setLanguage: (lang: 'fr' | 'en') => void
   soundEnabled: boolean
   setSoundEnabled: (v: boolean) => void
   theme: Theme
@@ -257,27 +261,49 @@ function SettingsModal({
   seed: number
   setSeed: (n: number) => void
 }) {
+  const isFr = language === 'fr'
+
   return (
     <div className="modal-backdrop" role="dialog" aria-modal="true">
       <div className="modal">
-        <h2>Paramètres</h2>
+        <h2>{isFr ? 'Paramètres' : 'Settings'}</h2>
 
         <div className="modal-option">
-          <label>Son</label>
+          <label>{isFr ? 'Langue' : 'Language'}</label>
+          <div style={{ display: 'flex', gap: 4 }}>
+            <button
+              className={language === 'fr' ? 'primary' : 'secondary'}
+              onClick={() => setLanguage('fr')}
+              style={{ padding: '6px 14px' }}
+            >
+              FR
+            </button>
+            <button
+              className={language === 'en' ? 'primary' : 'secondary'}
+              onClick={() => setLanguage('en')}
+              style={{ padding: '6px 14px' }}
+            >
+              EN
+            </button>
+          </div>
+        </div>
+
+        <div className="modal-option">
+          <label>{isFr ? 'Son' : 'Sound'}</label>
           <button className="secondary" onClick={() => setSoundEnabled(!soundEnabled)}>
-            {soundEnabled ? 'On 🔊' : 'Off 🔇'}
+            {soundEnabled ? (isFr ? 'Activé 🔊' : 'On 🔊') : (isFr ? 'Désactivé 🔇' : 'Off 🔇')}
           </button>
         </div>
 
         <div className="modal-option">
-          <label>Thème Visuel</label>
+          <label>{isFr ? 'Thème Visuel' : 'Visual Theme'}</label>
           <button className="secondary" onClick={() => setTheme(theme === 'classic' ? 'forest' : 'classic')}>
-            {theme === 'classic' ? '🔷 Classique' : '🌲 Forêt'}
+            {theme === 'classic' ? (isFr ? '🔷 Classique' : '🔷 Classic') : (isFr ? '🌲 Forêt' : '🌲 Forest')}
           </button>
         </div>
 
         <div className="modal-option">
-          <label>Nombre d'essais max</label>
+          <label>{isFr ? "Nombre d'essais max" : 'Max trials'}</label>
           <input
             type="number"
             value={maxTrials}
@@ -292,12 +318,12 @@ function SettingsModal({
             type="number"
             value={seed}
             onChange={(e) => setSeed(parseInt(e.target.value) || 0)}
-            style={{ width: '120px', padding: '8px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: 'white' }}
+            style={{ width: '80px', padding: '8px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: 'white' }}
           />
         </div>
 
         <div className="actions" style={{ marginTop: 24 }}>
-          <button className="primary" onClick={onClose}>Fermer</button>
+          <button className="primary" onClick={onClose}>{isFr ? 'Fermer' : 'Close'}</button>
         </div>
       </div>
     </div>
@@ -365,7 +391,7 @@ interface WCSTAppProps {
 }
 
 export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
-  const { settings } = useSettings()
+  const { settings, setLanguage, setSoundEnabled, setTheme } = useSettings()
   const [sessionId, setSessionId] = useState(() => Math.random().toString(36).slice(2))
   const [seed, setSeed] = useState(42)
   const [maxTrials, setMaxTrials] = useState<number>(128)
@@ -613,12 +639,14 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
       </header>
 
       {showSettingsModal && (
-        <SettingsModal
+        <WCSTSettingsModal
           onClose={() => setShowSettingsModal(false)}
+          language={settings.language}
+          setLanguage={setLanguage}
           soundEnabled={settings.soundEnabled}
-          setSoundEnabled={(v) => { }}
+          setSoundEnabled={setSoundEnabled}
           theme={settings.theme}
-          setTheme={(t) => { }}
+          setTheme={setTheme}
           maxTrials={maxTrials}
           setMaxTrials={setMaxTrials}
           seed={seed}
