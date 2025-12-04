@@ -1,9 +1,9 @@
 {
-  "name": "wcst",
+  "name": "prisme-toolkit",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "homepage": "https://Mhafsia.github.io/prisme-wcst/",
+  "homepage": "https://Mhafsia.github.io/prisme-toolkit/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
