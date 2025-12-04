@@ -45,7 +45,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             >
                 <h1
                     style={{
-                        background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)',
+                        background: 'linear-gradient(to right, #f97316, #22c55e, #3b82f6, #a855f7, #ec4899)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         fontSize: '5rem',

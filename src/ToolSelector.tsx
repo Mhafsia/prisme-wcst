@@ -19,7 +19,7 @@ export default function ToolSelector({ onSelectWCST, onSelectSUS, participantId,
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ width: 80 }}></div>
                 <span style={{
-                    background: 'linear-gradient(to right, #f97316, #ec4899, #a855f7, #3b82f6)',
+                    background: 'linear-gradient(to right, #f97316, #22c55e, #3b82f6, #a855f7, #ec4899)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     fontSize: '1.5rem',
