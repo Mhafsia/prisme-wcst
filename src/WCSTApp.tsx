@@ -3,6 +3,7 @@ import type { CardSpec, Rule, SessionSummary, TrialLogEntry } from './types'
 import { KEY_CARDS, initWCST, getDeckCard, evaluateSelection } from './engine/wcst'
 import { computeSummary, downloadCSV, toCSV } from './logger'
 import { useSettings, T } from './Settings'
+import logoImg from './assets/PRISME-Logo.png'
 import './styles.css'
 
 type Theme = 'forest' | 'classic'
@@ -633,7 +634,7 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
           {t.back}
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <img src="/PRISME-Logo.png" alt="" style={{ width: 26, height: 26 }} />
+          <img src={logoImg} alt="" style={{ width: 26, height: 26 }} />
           <span style={{
             background: 'linear-gradient(to right, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #6366f1, #8b5cf6)',
             WebkitBackgroundClip: 'text',

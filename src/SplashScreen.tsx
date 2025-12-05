@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import logoImg from './assets/PRISME-Logo.png'
 
 interface SplashScreenProps {
     onComplete: () => void
@@ -45,14 +46,13 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             >
                 {/* Brain Logo */}
                 <img
-                    src="/PRISME-Logo.png"
+                    src={logoImg}
                     alt="PRISME"
                     style={{
                         width: 100,
                         height: 100,
                         marginBottom: 20,
-                        filter: 'drop-shadow(0 0 30px rgba(139, 92, 246, 0.5))',
-                        animation: 'pulse 2s ease-in-out infinite'
+                        filter: 'drop-shadow(0 0 30px rgba(139, 92, 246, 0.5))'
                     }}
                 />
                 <h1
