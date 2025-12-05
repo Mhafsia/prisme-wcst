@@ -664,22 +664,34 @@ export default function WCSTApp({ participantId, onBack }: WCSTAppProps) {
       )}
 
       {!started ? (
-        <div className="intro-screen">
-          <h2 style={{ marginBottom: '10px', textAlign: 'center', background: 'linear-gradient(to right, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #6366f1, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '2.5rem', letterSpacing: '5px', fontWeight: '900' }}>PRISME</h2>
-          <h1 style={{ marginBottom: '20px', textAlign: 'center', fontSize: '1.3rem', color: '#94a3b8', fontWeight: '400' }}>{t.wcstSubtitle}</h1>
-          <p style={{ textAlign: 'center', marginBottom: '30px', color: '#e2e8f0' }}>{t.participant}: <strong>{participantId}</strong></p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '300px', margin: '0 auto' }}>
+        <div className="intro-screen" style={{ padding: '20px', maxWidth: 600, margin: '0 auto' }}>
+          <h2 style={{ marginBottom: '20px', textAlign: 'center', color: '#e2e8f0', fontSize: '1.5rem' }}>{t.tutorialTitle}</h2>
 
+          <p style={{ marginBottom: '16px', color: '#cbd5e1', lineHeight: 1.6 }}>{t.tutorialIntro}</p>
 
-            <button className="primary big-btn" onClick={startWithCountdown} style={{
-              marginTop: '20px',
-              padding: '16px',
-              fontSize: '18px',
-              borderRadius: '12px'
-            }}>
-              {t.start}
-            </button>
-          </div>
+          <p style={{ marginBottom: '8px', color: '#94a3b8' }}>{t.tutorialMatch}</p>
+          <ul style={{ marginBottom: '16px', color: '#cbd5e1', paddingLeft: '24px' }}>
+            <li>🎨 {t.tutorialColor}</li>
+            <li>🔷 {t.tutorialShape}</li>
+            <li>🔢 {t.tutorialNumber}</li>
+          </ul>
+
+          <p style={{ marginBottom: '8px', color: '#f97316', fontWeight: '600' }}>{t.tutorialImportant}</p>
+          <p style={{ marginBottom: '12px', color: '#cbd5e1', lineHeight: 1.6 }}>{t.tutorialRules}</p>
+          <p style={{ marginBottom: '20px', color: '#cbd5e1', lineHeight: 1.6 }}>{t.tutorialChange}</p>
+
+          <p style={{ marginBottom: '8px', color: '#94a3b8', fontSize: '0.9rem' }}>{t.participant}: <strong style={{ color: '#e2e8f0' }}>{participantId}</strong></p>
+
+          <p style={{ marginBottom: '24px', color: '#22c55e', fontStyle: 'italic' }}>{t.tutorialReady}</p>
+
+          <button className="primary big-btn" onClick={startWithCountdown} style={{
+            width: '100%',
+            padding: '16px',
+            fontSize: '18px',
+            borderRadius: '12px'
+          }}>
+            {t.start}
+          </button>
         </div>
       ) : (
         <div className="game-board">

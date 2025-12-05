@@ -100,7 +100,19 @@ export const T = {
         greatJob: 'Vous avez fait du super travail.',
         results: '📊 Résultats',
         maxTrials: "Nombre d'essais max",
-        seed: 'Seed'
+        seed: 'Seed',
+
+        // WCST Tutorial
+        tutorialTitle: 'Bienvenue dans le test',
+        tutorialIntro: 'Tu vas voir quatre cartes modèles en haut de l\'écran et une carte à placer en bas. Ton rôle est de choisir à quelle carte modèle elle ressemble le plus.',
+        tutorialMatch: 'Tu peux te baser sur :',
+        tutorialColor: 'la couleur',
+        tutorialShape: 'la forme',
+        tutorialNumber: 'le nombre d\'objets sur la carte',
+        tutorialImportant: 'Important :',
+        tutorialRules: 'Il n\'y a pas d\'explication au début. Tu dois simplement essayer, et le système te dira si ta réponse est correcte ou incorrecte.',
+        tutorialChange: 'La règle peut changer sans prévenir, alors continue d\'observer les indices pour t\'adapter.',
+        tutorialReady: 'Prends ton temps, mais garde un bon rythme. Si tu es prêt·e, appuie pour commencer.'
     },
     en: {
         // Common
@@ -158,7 +170,19 @@ export const T = {
         greatJob: 'You did a great job.',
         results: '📊 Results',
         maxTrials: 'Max trials',
-        seed: 'Seed'
+        seed: 'Seed',
+
+        // WCST Tutorial
+        tutorialTitle: 'Welcome to the test',
+        tutorialIntro: 'You will see four model cards at the top of the screen and one card to sort at the bottom. Your task is to choose the model card that matches it the best.',
+        tutorialMatch: 'You can match based on:',
+        tutorialColor: 'color',
+        tutorialShape: 'shape',
+        tutorialNumber: 'number of items',
+        tutorialImportant: 'Important:',
+        tutorialRules: 'No instructions are given at first. Try your best, and the system will tell you if your choice is correct or incorrect.',
+        tutorialChange: 'The sorting rule may change without warning, so keep paying attention and adjust as needed.',
+        tutorialReady: 'Take your time but keep a steady pace. When you\'re ready, tap to begin.'
     }
 }
 

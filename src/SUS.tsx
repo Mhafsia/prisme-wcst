@@ -387,7 +387,7 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                     {/* Question Box */}
                     <div style={fixedContainerStyle}>
                         <div style={{
-                            minHeight: 80,
+                            minHeight: 60,
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center'
@@ -402,7 +402,7 @@ export default function SUS({ onComplete, onBack, participantId }: SUSProps) {
                             </p>
                         </div>
 
-                        <div>
+                        <div style={{ marginTop: 8 }}>
                             {/* Emoji buttons */}
                             <div style={{
                                 display: 'flex',
